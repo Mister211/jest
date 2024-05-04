@@ -5,18 +5,18 @@ env:
 on:
   push:
     branches-ignore:
-      - main2
+      - production
 jobs:
-  Test-NextJS:
+  Test-NextJs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - name: Install dependencies
+      - name: Install Dependencies
         run: npm install
-      - name: Run tests
+      - name: Run Tests
         run: npm run test
   Deploy-Preview:
     runs-on: ubuntu-latest
@@ -30,3 +30,4 @@ jobs:
         run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
       - name: Deploy Project Artifacts to Vercel
         run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
+    needs: Test-NextJs
