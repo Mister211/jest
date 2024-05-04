@@ -7,7 +7,20 @@ on:
     branches-ignore:
       - production
 jobs:
-  Deploy-Preview:
+Deploy-Preview:
+runs-on : ubuntu-latest
+steps:
+      - uses: actions/checkout@v2
+      - name: Install node
+      - uses: actions/setup-node@v4
+      with:
+       node-version: '20'
+       - name: Install dependencies
+       run: npm install
+       - name: Run tests
+         run: npm run test
+
+ Deploy-Preview:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
